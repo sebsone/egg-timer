@@ -5,18 +5,17 @@ import { TimerButton } from './components/TimerButton'
 import { EggStyle } from './types/types';
 
 //todo:
-// pause timer
 // add description to tooltip
-// add description to timer
 // add new images.
 // what to do with timer when not counting
 // implement progress bar
+// Special animation when finished?
 
 
 const App: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [selectedEgg, setSelectedEgg] = useState<string>('');
+  const [selectedEgg, setSelectedEgg] = useState<EggStyle|null>(null);
 
   const eggStyles: EggStyle[] = [
     { name: 'Soft-boiled', description: 'Runny yolk', time: 5 * 60 , color: 'bg-pink-200 hover:bg-pink-300'},
@@ -46,16 +45,15 @@ const App: React.FC = () => {
   }, [isActive, timeLeft, selectedEgg]);
 
   
-
   const startTimer = (eggStyle: EggStyle) => {
-    setSelectedEgg(eggStyle.name);
+    setSelectedEgg(eggStyle);
     setTimeLeft(eggStyle.time);
     setIsActive(true);
   };
 
   const stopTimer = () => {
     setIsActive(false);
-    setSelectedEgg('');
+    setSelectedEgg(null);
     setTimeLeft(0);
   };
 
@@ -69,14 +67,12 @@ const App: React.FC = () => {
 
   const playAlarm = () => {
     // In a real app, you would implement sound playing here
-    alert(`Your ${selectedEgg} egg is ready!`);
+    alert(`Your ${selectedEgg.name} egg is ready!`);
   };
 
   const calculateProgress = (): number => {
     if (!selectedEgg) return 0;
-    const selectedEggStyle = eggStyles.find(style => style.name === selectedEgg);
-    if (!selectedEggStyle) return 0;
-    const totalTime = selectedEggStyle.time;
+    const totalTime = selectedEgg.time;
     return ((totalTime - timeLeft) / totalTime) * 100;
   };
 
@@ -88,11 +84,11 @@ const App: React.FC = () => {
           <TimerDisplay 
             timeLeft={timeLeft}
             isActive={isActive}
-            selectedTimer={selectedEgg}
+            selectedEgg={selectedEgg}
           />
           <div className="mt-8 w-full">
             {!isActive ? (
-              selectedEgg ? (
+              selectedEgg && timeLeft > 0 ? (
                 <button
                   onClick={resumeTimer}
                   className="w-full py-4 bg-green-200 hover:bg-green-300 text-green-800 font-bold rounded-2xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400"

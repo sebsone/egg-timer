@@ -1,14 +1,15 @@
 import { JSX } from "react"
+import { EggStyle } from "../types/types"
 
 interface TimerDisplayProps {
   timeLeft: number | null
   isActive: boolean
-  selectedTimer: string | null
+  selectedEgg: EggStyle | null
 }
 export const TimerDisplay = ({
   timeLeft,
   isActive,
-  selectedTimer,
+  selectedEgg,
 }: TimerDisplayProps) => {
     const formatTime = (seconds: number | null): string => {
         if (seconds === null) return '00:00'
@@ -19,8 +20,11 @@ export const TimerDisplay = ({
     const getStatusText = (): JSX.Element => {
         if (!isActive && timeLeft === 0) return <>Done!</>
         if (!isActive && timeLeft === null) return <>Select egg type</>
-        if (selectedTimer) return (
-          <>Cooking <span className="font-bold text-purple-600">{selectedTimer}</span> egg</>
+        if (selectedEgg) return (
+          <>
+            <div>Cooking <span className="font-bold text-purple-600">{selectedEgg.name}</span> egg </div>
+            <span className="flex items-center justify-center font-bold text-yellow-500">{selectedEgg.description}</span>
+          </>
         )
         return <></>
     }
