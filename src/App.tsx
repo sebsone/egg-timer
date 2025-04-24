@@ -7,7 +7,7 @@ import { EggStyle } from './types/types';
 //todo:
 // add description to tooltip
 // add new images.
-// what to do with timer when not counting
+// what to do with timer when not counting - hide?
 // implement progress bar
 // Special animation when finished?
 
