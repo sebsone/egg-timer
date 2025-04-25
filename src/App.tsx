@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header'
 import { TimerDisplay } from './components/TimerDisplay'
 import { TimerButton } from './components/TimerButton'
-import { EggStyle } from './types/types';
+import { EggStyle } from './types/EggStyles';
 
 //todo:
-// add description to tooltip
+// add correspondiong color to tooltip
 // add new images.
 // what to do with timer when not counting - hide?
 // implement progress bar

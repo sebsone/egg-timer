@@ -1,4 +1,4 @@
-import { EggStyle } from "../types/types"
+import { EggStyle } from "../types/EggStyles"
 
 interface TimerButtonProps {
   eggStyle: EggStyle
@@ -13,15 +13,28 @@ export const TimerButton = ({
     const minutes = Math.floor(time / 60)
     const seconds = time % 60
     return (
-        <button
-            onClick={onClick}
-            className={`${color} py-4 px-2 rounded-2xl text-center shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-400`}
-        >
-        <div className="font-bold text-lg">{name}</div>
-        <div className="text-sm opacity-75">
-            {minutes}:{seconds.toString().padStart(2, '0')}
+        <div className={`${color} tooltip py-4 px-2 rounded-2xl text-center shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-400`}>
+            <div className="tooltip-content">
+                <div className="animate-bounce text-orange-400 text-xl fon">{eggStyle.description}</div>
+            </div>
+            <button
+                onClick={onClick}
+                >
+            <div className="font-bold text-lg">{name}</div>
+            <div className="text-sm opacity-75">
+                {minutes}:{seconds.toString().padStart(2, '0')}
+            </div>
+            </button>
         </div>
-        </button>
+    //     <button
+    //     onClick={onClick}
+    //     className={`${color} py-4 px-2 rounded-2xl text-center shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-400`}
+    //     >
+    // <div className="font-bold text-lg">{name}</div>
+    // <div className="text-sm opacity-75">
+    //     {minutes}:{seconds.toString().padStart(2, '0')}
+    // </div>
+    // </button>
     )
 }
 

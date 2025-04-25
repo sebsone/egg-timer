@@ -1,5 +1,5 @@
 import { JSX } from "react"
-import { EggStyle } from "../types/types"
+import { EggStyle } from "../types/EggStyles"
 
 interface TimerDisplayProps {
   timeLeft: number | null
