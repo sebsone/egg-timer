@@ -8,7 +8,3 @@ export const Header = () => {
     </header>
   )
 }
-
-
-// Old header
-{/* <h1 className="text-3xl font-bold text-center mb-6 text-yellow-600">Egg Timer</h1> */}

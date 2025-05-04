@@ -11,6 +11,7 @@ export const TimerDisplay = ({
   isActive,
   selectedEgg,
 }: TimerDisplayProps) => {
+    const color = selectedEgg?.color;
     const formatTime = (seconds: number | null): string => {
         if (seconds === null) return '00:00'
         const mins = Math.floor(seconds / 60)
@@ -43,37 +44,33 @@ export const TimerDisplay = ({
         )
         }
     }
+    
+    const getProgressBar = () => {
+      const calculateProgress = (): number => {
+        if (!selectedEgg) return 0;
+        const totalTime = selectedEgg.time;
+        return ((totalTime - timeLeft) / totalTime) * 100;
+      };
+
+      return(
+        <div className="w-100 h-2 bg-gray-200 rounded-full overflow-hidden mt-2">
+            <div
+              className={`bg-${color}-200 h-full transition-all duration-1000 ease-linear`}
+              style={{ width: `${calculateProgress()}%`}}>
+              </div>
+          </div>
+      )
+    }
     return (
         <div className="w-full flex flex-col items-center">
         {getEggIcon()}
         <div className="text-6xl font-bold text-gray-800 font-mono tracking-wider">
             {formatTime(timeLeft)}
         </div>
+        <>
+          {getProgressBar()} 
+        </>
         <div className="mt-2 text-lg text-purple-600">{getStatusText()}</div>
         </div>
     )
 }
-
-
-
-
-
-
-// Old timer
-// <div className="w-64 h-64 mx-auto rounded-full border-8 border-gray-200 flex items-center justify-center">
-// <div className="absolute inset-0 rounded-full overflow-hidden">
-//     <div 
-//     className="bg-yellow-400 h-full transition-all duration-1000"
-//     style={{ 
-//         width: '100%', 
-//         transform: `translateY(${100 - calculateProgress()}%)` 
-//     }}
-//     ></div>
-// </div>
-// <div className="z-10">
-//     <div className="text-5xl font-bold text-gray-800">{formatTime(timeLeft)}</div>
-//     {selectedEgg && (
-//     <div className="text-lg text-center text-gray-600 mt-2">{selectedEgg}</div>
-//     )}
-// </div>
-// </div>

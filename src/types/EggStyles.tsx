@@ -3,4 +3,5 @@ export type EggStyle = {
   description: string;
   time: number;
   color: string;
+  tooltipPosition: string;
 };

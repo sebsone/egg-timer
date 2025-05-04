@@ -4,24 +4,17 @@ import { TimerDisplay } from './components/TimerDisplay'
 import { TimerButton } from './components/TimerButton'
 import { EggStyle } from './types/EggStyles';
 
-//todo:
-// add correspondiong color to tooltip
-// add new images.
-// what to do with timer when not counting - hide?
-// implement progress bar
-// Special animation when finished?
-
 
 const App: React.FC = () => {
-  const [timeLeft, setTimeLeft] = useState<number>(0);
+  const [timeLeft, setTimeLeft] = useState<number|null>(null);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [selectedEgg, setSelectedEgg] = useState<EggStyle|null>(null);
 
   const eggStyles: EggStyle[] = [
-    { name: 'Soft-boiled', description: 'Runny yolk', time: 5 * 60 , color: 'bg-pink-200 hover:bg-pink-300'},
-    { name: 'Almost set', description: 'Sticky yolk', time: 7 * 60 , color: 'bg-yellow-200 hover:bg-yellow-300'},
-    { name: 'Softly set', description: 'Jammy', time: 8 * 60 , color: 'bg-blue-200 hover:bg-blue-300'},
-    { name: 'Hard-boiled', description: 'Firm throughout', time: 10 * 60 , color: 'bg-green-200 hover:bg-green-300'},
+    { name: 'Soft-boiled', description: 'Runny yolk', time: 0.5 * 60 , color: 'pink', tooltipPosition: "top"},
+    { name: 'Almost set', description: 'Sticky yolk', time: 7 * 60 , color: 'yellow', tooltipPosition: "top"},
+    { name: 'Softly set', description: 'Jammy', time: 8 * 60 , color: 'blue', tooltipPosition: "bottom"},
+    { name: 'Hard-boiled', description: 'Firm throughout', time: 10 * 60 , color: 'green', tooltipPosition: "bottom"},
   ];
 
   useEffect(() => {
@@ -54,7 +47,7 @@ const App: React.FC = () => {
   const stopTimer = () => {
     setIsActive(false);
     setSelectedEgg(null);
-    setTimeLeft(0);
+    setTimeLeft(null);
   };
 
   const pauseTimer = () => {
@@ -70,11 +63,6 @@ const App: React.FC = () => {
     alert(`Your ${selectedEgg.name} egg is ready!`);
   };
 
-  const calculateProgress = (): number => {
-    if (!selectedEgg) return 0;
-    const totalTime = selectedEgg.time;
-    return ((totalTime - timeLeft) / totalTime) * 100;
-  };
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-yellow-100 to-purple-100 flex flex-col items-center p-6">
@@ -131,34 +119,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-
-
-{/* <div className="flex justify-center space-x-4">
-          {isActive ? (
-            <button
-              onClick={stopTimer}
-              className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-            >
-              Stop
-            </button>
-          ) : (
-            timeLeft > 0 && (
-              <button
-                onClick={() => setIsActive(true)}
-                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-              >
-                Resume
-              </button>
-            )
-          )}
-          
-          {(isActive || timeLeft > 0) && (
-            <button
-              onClick={resetTimer}
-              className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
-            >
-              Reset
-            </button>
-          )}
-        </div> */}
