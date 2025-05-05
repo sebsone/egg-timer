@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header'
 import { TimerDisplay } from './components/TimerDisplay'
 import { TimerButton } from './components/TimerButton'
-import { EggStyle } from './types/EggStyles';
+import { createEggStyle, EggStyle } from './types/EggStyle';
 
 
 const App: React.FC = () => {
@@ -11,10 +11,10 @@ const App: React.FC = () => {
   const [selectedEgg, setSelectedEgg] = useState<EggStyle|null>(null);
 
   const eggStyles: EggStyle[] = [
-    { name: 'Soft-boiled', description: 'Runny yolk', time: 0.5 * 60 , color: 'pink', tooltipPosition: "top"},
-    { name: 'Almost set', description: 'Sticky yolk', time: 7 * 60 , color: 'yellow', tooltipPosition: "top"},
-    { name: 'Softly set', description: 'Jammy', time: 8 * 60 , color: 'blue', tooltipPosition: "bottom"},
-    { name: 'Hard-boiled', description: 'Firm throughout', time: 10 * 60 , color: 'green', tooltipPosition: "bottom"},
+    createEggStyle({ name: 'Soft-boiled', description: 'Runny yolk', time: 0.5 * 60 , color: 'pink', tooltipPosition: "top"}),
+    createEggStyle({ name: 'Almost set', description: 'Sticky yolk', time: 7 * 60 , color: 'yellow', tooltipPosition: "top"}),
+    createEggStyle({ name: 'Softly set', description: 'Jammy', time: 8 * 60 , color: 'blue', tooltipPosition: "bottom"}),
+    createEggStyle({ name: 'Hard-boiled', description: 'Firm throughout', time: 10 * 60 , color: 'green', tooltipPosition: "bottom"}),
   ];
 
   useEffect(() => {
