@@ -19,7 +19,7 @@ export const TimerDisplay = ({
         return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
     }
     const getStatusText = (): JSX.Element => {
-        if (!isActive && timeLeft === 0) return <>Done!</>
+        if (!isActive && timeLeft === 0) return <> Your egg is <span className="font-bold text-purple-600"> Done! </span></>
         if (!isActive && timeLeft === null) return <>Select egg type</>
         if (selectedEgg) return (
           <>
@@ -30,19 +30,33 @@ export const TimerDisplay = ({
         return <></>
     }
     const getEggIcon = () => {
-        if (!isActive && timeLeft === null) {
-        return (
-            <div className="w-24 h-32 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
-            <div className="w-16 h-16 bg-yellow-300 rounded-full"></div>
-            </div>
+      if (!isActive && timeLeft === null) {
+        return(
+          <div className="w-30 h-32">
+            <img src="/eggs.png"></img>
+          </div>
         )
-        } else {
-        return (
-            <div className="w-24 h-32 bg-yellow-100 rounded-full flex items-center justify-center mb-4 animate-pulse">
-            <div className="w-16 h-16 bg-yellow-300 rounded-full"></div>
-            </div>
+      } else {
+        return(
+          <div className="w-30 h-32 animate-pulse">
+            <img src="/eggs.png"></img>
+          </div>
         )
-        }
+      }
+      
+        // if (!isActive && timeLeft === null) {
+        // return (
+        //     <div className="w-24 h-32 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+        //     <div className="w-16 h-16 bg-yellow-300 rounded-full"></div>
+        //     </div>
+        // )
+        // } else {
+        // return (
+        //     <div className="w-24 h-32 bg-yellow-100 rounded-full flex items-center justify-center mb-4 animate-pulse">
+        //     <div className="w-16 h-16 bg-yellow-300 rounded-full"></div>
+        //     </div>
+        // )
+        // }
     }
     
     const getProgressBar = () => {
@@ -61,6 +75,7 @@ export const TimerDisplay = ({
           </div>
       )
     }
+
     return (
         <div className="w-full flex flex-col items-center">
         {getEggIcon()}
