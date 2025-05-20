@@ -1,54 +1,60 @@
-# React + TypeScript + Vite
+# Egg Timer ⏲️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **React** application to help you cook perfect eggs every time! Built with **TypeScript**, **Vite**, and **TailwindCSS**, this project is fast, responsive, and easy to use.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Customizable Egg Timers**: Choose from multiple egg styles (soft-boiled, hard-boiled, etc.) with pre-set times.
+- **Interactive UI**: Intuitive and responsive design with animated buttons and progress indicators.
+- **Audio Alarm**: Notifies you when your egg is ready with a built-in alarm sound.
+- **Pause/Resume Functionality**: Flexibility to pause and resume the timer as needed.
+- **Dynamic Styling**: TailwindCSS-powered themes for a visually appealing experience.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React**: For building the user interface.
+- **TypeScript**: Ensures type safety and better code maintainability.
+- **Vite**: Lightning-fast development and build tool.
+- **TailwindCSS**: For modern and responsive styling.
+- **DaisyUI**: Enhances TailwindCSS with pre-designed components.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 📦 Installation
+
+1. Clone the repository:
+  ```bash
+  git clone https://github.com/your-username/egg-timer.git
+  cd egg-timer
+  ```
+
+2. Install dependencies:
+  ```bash
+  npm install
+   ```
+
+3. Start deployment server:
+  ```bash
+  npm run dev
+   ```
+
+4. Open your browser and navigate to
+```
+http://localhost:3000
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🧩 Project Structure
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```
+egg-timer/
+├── public/               # Static assets (images, audio)
+├── src/                  # Source code
+│   ├── components/       # Reusable React components
+│   ├── types/            # TypeScript type definitions
+│   ├── App.tsx           # Main application component
+│   ├── main.tsx          # Entry point
+│   └── index.css         # Global styles
+├── package.json          # Project metadata and dependencies
+├── tailwind.config.js    # TailwindCSS configuration
+├── vite.config.ts        # Vite configuration
+└── tsconfig.json         # TypeScript configuration
 ```
