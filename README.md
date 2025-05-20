@@ -1,5 +1,8 @@
 # Egg Timer ⏲️
 
+https://egg-timer-ebon.vercel.app/
+![image](https://github.com/user-attachments/assets/c0b512a0-71f7-4154-bec5-95920806acc8)
+
 A **React** application to help you cook perfect eggs every time! Built with **TypeScript**, **Vite**, and **TailwindCSS**, this project is fast, responsive, and easy to use.
 
 ## 🚀 Features
