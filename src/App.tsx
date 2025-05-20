@@ -13,30 +13,30 @@ const App: React.FC = () => {
   const alarmRef = useRef<AlarmHandle | null>(null);
 
   const eggStyles: EggStyle[] = [
-    createEggStyle({ name: 'Soft-boiled', description: 'Runny yolk', time: 0.1 * 60 , color: 'pink', tooltipPosition: "top"}),
+    createEggStyle({ name: 'Soft-boiled', description: 'Runny yolk', time: 5 * 60 , color: 'pink', tooltipPosition: "top"}),
     createEggStyle({ name: 'Almost set', description: 'Sticky yolk', time: 7 * 60 , color: 'yellow', tooltipPosition: "top"}),
     createEggStyle({ name: 'Softly set', description: 'Jammy', time: 8 * 60 , color: 'blue', tooltipPosition: "bottom"}),
     createEggStyle({ name: 'Hard-boiled', description: 'Firm throughout', time: 10 * 60 , color: 'green', tooltipPosition: "bottom"}),
   ];
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-    
-    if (isActive && timeLeft > 0) {
-      interval = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
-      }, 1000);
-    } else if (timeLeft === 0) {
+    if (timeLeft === null) return;
+
+    if (timeLeft === 0) {
       setIsActive(false);
-      if (interval) clearInterval(interval);
       if (selectedEgg) {
         playAlarm();
       }
+      return;
     }
-    
-    return () => {
-      if (interval) clearInterval(interval);
-    };
+
+    if (!isActive || timeLeft <= 0) return;
+
+    const interval = setInterval(() => {
+      setTimeLeft((prevTime) => (prevTime !== null ? prevTime - 1 : null));
+    }, 1000);
+  
+    return () => clearInterval(interval);
   }, [isActive, timeLeft, selectedEgg]);
 
   
@@ -80,7 +80,7 @@ const App: React.FC = () => {
             />
             <div className="mt-8 w-full">
               {!isActive ? (
-                selectedEgg && timeLeft > 0 ? (
+                selectedEgg && timeLeft && timeLeft > 0 ? (
                   <button
                     onClick={resumeTimer}
                     className="w-full py-4 bg-green-200 hover:bg-green-300 text-green-800 font-bold rounded-2xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400"
